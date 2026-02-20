@@ -2,87 +2,100 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 40 33% 96%;
+    --foreground: 200 25% 15%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 40 30% 98%;
+    --card-foreground: 200 25% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 40 30% 98%;
+    --popover-foreground: 200 25% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 180 70% 22%;
+    --primary-foreground: 40 33% 96%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 45 80% 55%;
+    --secondary-foreground: 200 25% 15%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 150 15% 90%;
+    --muted-foreground: 200 10% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 45 85% 58%;
+    --accent-foreground: 200 25% 15%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 40 20% 88%;
+    --input: 40 20% 88%;
+    --ring: 180 70% 22%;
 
-    --radius: 0.5rem;
+    --radius: 1rem;
+
+    /* Custom NurDua tokens */
+    --nur-teal: 180 70% 22%;
+    --nur-teal-light: 180 50% 35%;
+    --nur-gold: 45 85% 58%;
+    --nur-gold-light: 45 70% 75%;
+    --nur-cream: 40 33% 96%;
+    --nur-sage: 150 25% 75%;
+    --nur-sage-dark: 150 30% 40%;
+    --nur-warm: 25 60% 92%;
+    --nur-glow: 45 100% 70%;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 200 25% 8%;
+    --foreground: 40 20% 90%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 200 20% 12%;
+    --card-foreground: 40 20% 90%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 200 20% 12%;
+    --popover-foreground: 40 20% 90%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 180 55% 40%;
+    --primary-foreground: 200 25% 8%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 45 70% 45%;
+    --secondary-foreground: 40 20% 90%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 200 15% 18%;
+    --muted-foreground: 200 10% 60%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 45 75% 50%;
+    --accent-foreground: 200 25% 8%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 200 15% 20%;
+    --input: 200 15% 20%;
+    --ring: 180 55% 40%;
+
+    --nur-teal: 180 55% 40%;
+    --nur-teal-light: 180 45% 50%;
+    --nur-gold: 45 75% 50%;
+    --nur-gold-light: 45 60% 40%;
+    --nur-cream: 200 25% 8%;
+    --nur-sage: 150 20% 30%;
+    --nur-sage-dark: 150 25% 50%;
+    --nur-warm: 25 30% 15%;
+    --nur-glow: 45 90% 55%;
+
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -100,6 +113,125 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior: none;
+  }
+
+  .font-arabic {
+    font-family: 'Amiri', serif;
+  }
+}
+
+@layer components {
+  .nur-gradient {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--nur-teal)) 0%,
+      hsl(var(--nur-teal-light)) 50%,
+      hsl(var(--nur-sage-dark)) 100%
+    );
+  }
+
+  .nur-gold-gradient {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--nur-gold)) 0%,
+      hsl(var(--nur-glow)) 100%
+    );
+  }
+
+  .nur-card {
+    @apply bg-card rounded-2xl shadow-lg border border-border/50;
+    backdrop-filter: blur(10px);
+  }
+
+  .nur-glow-effect {
+    box-shadow: 0 0 30px hsl(var(--nur-gold) / 0.15),
+                0 0 60px hsl(var(--nur-teal) / 0.05);
+  }
+
+  .nur-text-glow {
+    text-shadow: 0 0 20px hsl(var(--nur-gold) / 0.3);
+  }
+
+  .particle-burst {
+    @apply absolute rounded-full pointer-events-none;
+    background: hsl(var(--nur-gold));
+    animation: particle 0.6s ease-out forwards;
+  }
+
+  .counter-ring {
+    background: conic-gradient(
+      hsl(var(--nur-teal)) var(--progress, 0%),
+      hsl(var(--border)) var(--progress, 0%)
+    );
+  }
+}
+
+@layer utilities {
+  @keyframes particle {
+    0% { transform: scale(1) translate(0, 0); opacity: 1; }
+    100% { transform: scale(0) translate(var(--tx, 20px), var(--ty, -20px)); opacity: 0; }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 10px hsl(var(--nur-gold) / 0.2); }
+    50% { box-shadow: 0 0 30px hsl(var(--nur-gold) / 0.5); }
+  }
+
+  @keyframes grow-tree {
+    0% { transform: scaleY(0.5); opacity: 0.5; }
+    100% { transform: scaleY(1); opacity: 1; }
+  }
+
+  @keyframes flip-card {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(180deg); }
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  @keyframes dove-fly {
+    0% { transform: translate(0, 0) scale(1); opacity: 1; }
+    100% { transform: translate(100px, -100px) scale(0.5); opacity: 0; }
+  }
+
+  @keyframes bead-press {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+  }
+
+  @keyframes confetti-fall {
+    0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100px) rotate(720deg); opacity: 0; }
+  }
+
+  @keyframes count-up {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+  }
+
+  .animate-float { animation: float 3s ease-in-out infinite; }
+  .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+  .animate-grow-tree { animation: grow-tree 0.5s ease-out forwards; }
+  .animate-bead-press { animation: bead-press 0.15s ease-out; }
+  .animate-count-up { animation: count-up 0.3s ease-out; }
+  .animate-dove-fly { animation: dove-fly 1.5s ease-out forwards; }
+  .animate-confetti { animation: confetti-fall 1s ease-out forwards; }
+  .animate-shimmer {
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
   }
 }
