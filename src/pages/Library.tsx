@@ -22,7 +22,7 @@ const Library = () => {
   }, [search, activeCategory]);
 
   return (
-    <div className="min-h-screen pb-24 pt-14 px-6">
+    <div className="min-h-[100dvh] pb-20 pt-12 px-4">
       <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}>
         <h1 className="text-2xl font-bold text-foreground mb-1">Dua Library</h1>
         <p className="text-sm text-muted-foreground mb-4">{duas.length} authentic duas</p>

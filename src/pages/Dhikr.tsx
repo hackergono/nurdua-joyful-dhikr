@@ -52,7 +52,7 @@ const Dhikr = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center pb-24 pt-14 px-6">
+    <div className="min-h-[100dvh] flex flex-col items-center pb-20 pt-12 px-4">
       {/* Header */}
       <motion.div
         className="text-center mb-8"

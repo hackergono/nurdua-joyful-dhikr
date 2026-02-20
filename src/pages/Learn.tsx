@@ -11,7 +11,7 @@ const Learn = () => {
   };
 
   return (
-    <div className="min-h-screen pb-24 pt-14 px-6">
+    <div className="min-h-[100dvh] pb-20 pt-12 px-4">
       <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}>
         <div className="flex items-center gap-2 mb-1">
           <BookOpen size={20} className="text-accent" />
