@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BookOpen, ChevronDown, ChevronUp, Star } from "lucide-react";
 import { islamBasics } from "@/data/islam-basics";
+import wuduStepsImg from "@/assets/wudu-steps.png";
 
 const Learn = () => {
   const [expandedId, setExpandedId] = useState<string | null>("shahada");
@@ -74,6 +75,15 @@ const Learn = () => {
                         <p className="text-sm text-muted-foreground leading-relaxed">
                           {topic.description}
                         </p>
+
+                        {topic.image === "wudu-steps" && (
+                          <img
+                            src={wuduStepsImg}
+                            alt="Steps of Wudu - Ablution"
+                            className="w-full rounded-xl border border-border/50"
+                            loading="lazy"
+                          />
+                        )}
 
                         {topic.items && (
                           <div className="space-y-2">
