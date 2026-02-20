@@ -20,7 +20,7 @@ const Names = () => {
   }, [search]);
 
   return (
-    <div className="min-h-screen pb-24 pt-14 px-4">
+    <div className="min-h-[100dvh] pb-20 pt-12 px-4">
       {/* Header */}
       <motion.div
         className="text-center mb-4 px-2"

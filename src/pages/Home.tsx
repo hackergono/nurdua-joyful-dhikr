@@ -19,7 +19,7 @@ const Home = () => {
   const treeLevel = Math.min(Math.floor(totalCount / 33), 10);
 
   return (
-    <div className="min-h-screen pb-24">
+    <div className="min-h-[100dvh] pb-20">
       {/* Hero */}
       <div className="relative overflow-hidden">
         <div
