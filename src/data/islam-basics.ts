@@ -5,6 +5,7 @@ export interface IslamBasic {
   transliteration?: string;
   items?: { arabic: string; transliteration: string; english: string }[];
   description: string;
+  image?: string;
 }
 
 export const islamBasics: IslamBasic[] = [
@@ -90,17 +91,19 @@ export const islamBasics: IslamBasic[] = [
   {
     id: "wudu",
     title: "Wudu – Ablution Before Prayer",
-    description: "Wudu is the ritual washing performed before prayer to purify oneself.",
+    description: "Wudu is the ritual washing performed before prayer to purify oneself. Follow these 10 steps:",
+    image: "wudu-steps",
     items: [
-      { arabic: "النِّيَّة", transliteration: "An-Niyyah", english: "Step 1: Make the intention in your heart to perform wudu." },
-      { arabic: "غَسْلُ اليَدَيْن", transliteration: "Ghasl al-Yadayn", english: "Step 2: Wash both hands up to the wrists three times." },
-      { arabic: "المَضْمَضَة", transliteration: "Al-Madmada", english: "Step 3: Rinse the mouth three times." },
-      { arabic: "الاسْتِنْشَاق", transliteration: "Al-Istinshaq", english: "Step 4: Sniff water into the nostrils three times." },
-      { arabic: "غَسْلُ الوَجْه", transliteration: "Ghasl al-Wajh", english: "Step 5: Wash the face three times." },
-      { arabic: "غَسْلُ الذِّرَاعَيْن", transliteration: "Ghasl adh-Dhira'ayn", english: "Step 6: Wash both arms up to the elbows three times." },
-      { arabic: "مَسْحُ الرَّأْس", transliteration: "Mash ar-Ra's", english: "Step 7: Wipe the head with wet hands once." },
-      { arabic: "مَسْحُ الأُذُنَيْن", transliteration: "Mash al-Udhunain", english: "Step 8: Wipe the ears with wet fingers." },
-      { arabic: "غَسْلُ القَدَمَيْن", transliteration: "Ghasl al-Qadamayn", english: "Step 9: Wash both feet up to the ankles three times." },
+      { arabic: "بِسْمِ اللّٰهِ", transliteration: "Bismillah", english: "Step 1: Say Bismillah — Begin in the name of Allah." },
+      { arabic: "غَسْلُ اليَدَيْن", transliteration: "Ghasl al-Yadayn", english: "Step 2: Wash both hands up to the wrists — 3 times." },
+      { arabic: "المَضْمَضَة", transliteration: "Al-Madmada", english: "Step 3: Rinse the mouth — 3 times." },
+      { arabic: "الاسْتِنْشَاق", transliteration: "Al-Istinshaq", english: "Step 4: Rinse the nose — 3 times." },
+      { arabic: "غَسْلُ الوَجْه", transliteration: "Ghasl al-Wajh", english: "Step 5: Wash the face — 3 times." },
+      { arabic: "غَسْلُ الذِّرَاعِ اليُمْنَى", transliteration: "Ghasl adh-Dhira' al-Yumna", english: "Step 6: Wash the right hand from fingertips to elbow — 3 times." },
+      { arabic: "غَسْلُ الذِّرَاعِ اليُسْرَى", transliteration: "Ghasl adh-Dhira' al-Yusra", english: "Step 7: Wash the left hand from fingertips to elbow — 3 times." },
+      { arabic: "مَسْحُ الرَّأْسِ وَالأُذُنَيْن", transliteration: "Mash ar-Ra's wal-Udhunain", english: "Step 8: Wipe the head & ears — once." },
+      { arabic: "غَسْلُ القَدَمِ اليُمْنَى", transliteration: "Ghasl al-Qadam al-Yumna", english: "Step 9: Wash the right foot up to the ankles — 3 times." },
+      { arabic: "غَسْلُ القَدَمِ اليُسْرَى", transliteration: "Ghasl al-Qadam al-Yusra", english: "Step 10: Wash the left foot up to the ankles — 3 times." },
     ],
   },
 ];
