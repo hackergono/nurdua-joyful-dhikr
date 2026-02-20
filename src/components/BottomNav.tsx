@@ -1,4 +1,4 @@
-import { Home, Circle, BookOpen, BarChart3, Sparkles } from "lucide-react";
+import { Home, Circle, BookOpen, BarChart3, Sparkles, GraduationCap } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -6,6 +6,7 @@ const tabs = [
   { path: "/", icon: Home, label: "Home" },
   { path: "/dhikr", icon: Circle, label: "Dhikr" },
   { path: "/names", icon: Sparkles, label: "99 Names" },
+  { path: "/learn", icon: GraduationCap, label: "Learn" },
   { path: "/library", icon: BookOpen, label: "Duas" },
   { path: "/progress", icon: BarChart3, label: "Progress" },
 ];
