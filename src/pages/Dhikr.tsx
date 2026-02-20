@@ -80,7 +80,8 @@ const Dhikr = () => {
             <p className="font-arabic text-2xl text-foreground nur-text-glow" dir="rtl">
               {current.arabic}
             </p>
-            <p className="text-xs text-muted-foreground mt-1">{current.english}</p>
+            <p className="text-xs text-accent mt-1 italic">{current.transliteration}</p>
+            <p className="text-xs text-muted-foreground mt-0.5">{current.english}</p>
           </motion.div>
         </AnimatePresence>
         <button onClick={nextDhikr} className="p-2 rounded-full bg-muted hover:bg-muted/80 transition-colors">

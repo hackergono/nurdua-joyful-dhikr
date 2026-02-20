@@ -64,7 +64,8 @@ const DuaCard = ({ dua, compact = false }: DuaCardProps) => {
             <p className="font-arabic text-xl leading-loose text-foreground text-right nur-text-glow" dir="rtl">
               {dua.arabic}
             </p>
-            <p className="text-[10px] text-muted-foreground mt-2">
+            <p className="text-xs text-muted-foreground mt-2 italic">{dua.transliteration}</p>
+            <p className="text-[10px] text-muted-foreground mt-1">
               Tap to read translation →
             </p>
           </motion.div>

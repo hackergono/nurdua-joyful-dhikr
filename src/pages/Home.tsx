@@ -98,11 +98,12 @@ const Home = () => {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.6 }}
       >
-        <p className="font-arabic text-xl text-center mb-2 nur-text-glow" dir="rtl">
+        <p className="font-arabic text-xl text-center mb-1 nur-text-glow" dir="rtl">
           سُبْحَانَ اللَّهِ وَبِحَمْدِهِ
         </p>
+        <p className="text-xs text-center opacity-90 italic mb-1">SubhanAllahi wa bihamdihi</p>
         <p className="text-xs text-center opacity-80">
-          "Whoever says 'SubhanAllahi wa bihamdihi' 100 times, all sins are forgiven." — Bukhari
+          "Whoever says this 100 times, all sins are forgiven." — Bukhari
         </p>
       </motion.div>
     </div>
