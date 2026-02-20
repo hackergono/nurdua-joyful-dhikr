@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Dhikr from "./pages/Dhikr";
 import Library from "./pages/Library";
 import Progress from "./pages/Progress";
+import Names from "./pages/Names";
 import NotFound from "./pages/NotFound";
 import BottomNav from "./components/BottomNav";
 
@@ -22,6 +23,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/dhikr" element={<Dhikr />} />
+            <Route path="/names" element={<Names />} />
             <Route path="/library" element={<Library />} />
             <Route path="/progress" element={<Progress />} />
             <Route path="*" element={<NotFound />} />
