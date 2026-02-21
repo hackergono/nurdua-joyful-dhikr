@@ -20,6 +20,7 @@ export const islamBasics: IslamBasic[] = [
     id: "five-pillars",
     title: "Five Pillars of Islam",
     description: "The five foundational acts of worship that every Muslim must follow.",
+    image: "five-pillars",
     items: [
       { arabic: "الشَّهَادَة", transliteration: "Ash-Shahada", english: "Declaration of Faith – Testifying that there is no god but Allah and Muhammad ﷺ is His Messenger." },
       { arabic: "الصَّلَاة", transliteration: "As-Salah", english: "Prayer – Five daily prayers performed facing the Kaaba in Makkah." },
@@ -32,6 +33,7 @@ export const islamBasics: IslamBasic[] = [
     id: "six-articles",
     title: "Six Articles of Faith (Iman)",
     description: "The core beliefs that define a Muslim's faith.",
+    image: "six-articles",
     items: [
       { arabic: "الإِيمَانُ بِاللّٰه", transliteration: "Al-Iman billah", english: "Belief in Allah – The One and Only God, Creator of everything." },
       { arabic: "الإِيمَانُ بِالمَلَائِكَة", transliteration: "Al-Iman bil-Mala'ika", english: "Belief in Angels – Created from light, they carry out Allah's commands." },
@@ -52,6 +54,7 @@ export const islamBasics: IslamBasic[] = [
     id: "five-prayers",
     title: "The Five Daily Prayers",
     description: "Muslims pray five times a day at specific times as a direct connection with Allah.",
+    image: "five-prayers",
     items: [
       { arabic: "الفَجْر", transliteration: "Al-Fajr", english: "Dawn Prayer – 2 rakaat, performed before sunrise." },
       { arabic: "الظُّهْر", transliteration: "Adh-Dhuhr", english: "Noon Prayer – 4 rakaat, performed after the sun passes its zenith." },
@@ -104,6 +107,19 @@ export const islamBasics: IslamBasic[] = [
       { arabic: "مَسْحُ الرَّأْسِ وَالأُذُنَيْن", transliteration: "Mash ar-Ra's wal-Udhunain", english: "Step 8: Wipe the head & ears — once." },
       { arabic: "غَسْلُ القَدَمِ اليُمْنَى", transliteration: "Ghasl al-Qadam al-Yumna", english: "Step 9: Wash the right foot up to the ankles — 3 times." },
       { arabic: "غَسْلُ القَدَمِ اليُسْرَى", transliteration: "Ghasl al-Qadam al-Yusra", english: "Step 10: Wash the left foot up to the ankles — 3 times." },
+    ],
+  },
+  {
+    id: "before-sleeping",
+    title: "Before Sleeping – Reminders",
+    description: "Sunnah practices and duas to recite before going to sleep every night.",
+    items: [
+      { arabic: "سُورَةُ المُلْك", transliteration: "Surah Al-Mulk", english: "Recite Surah Al-Mulk (Surah 67) — it intercedes for its reader." },
+      { arabic: "آيَةُ الكُرْسِي", transliteration: "Ayat al-Kursi", english: "Recite Ayat al-Kursi (Al-Baqarah 2:255) — Allah assigns a guardian over you." },
+      { arabic: "سُورَةُ الإِخْلَاص، الفَلَق، النَّاس", transliteration: "Surah Ikhlas, Falaq & Nas", english: "Recite Surah Ikhlas, Surah Al-Falaq, and Surah An-Nas — 3 times each." },
+      { arabic: "آخِرُ آيَتَيْنِ مِنْ سُورَةِ البَقَرَة", transliteration: "Last 2 Ayahs of Surah Al-Baqarah", english: "Recite verses 285-286 of Surah Al-Baqarah — they are sufficient for the one who recites them." },
+      { arabic: "سُورَةُ السَّجْدَة", transliteration: "Surah As-Sajdah", english: "Recite Surah As-Sajdah (Surah 32) — The Prophet ﷺ would not sleep without reciting it." },
+      { arabic: "نِيَّةُ الاسْتِيقَاظِ لِلْفَجْر", transliteration: "Niyyat al-Istiqaz lil-Fajr", english: "Make the intention to wake up for Fajr prayer." },
     ],
   },
 ];

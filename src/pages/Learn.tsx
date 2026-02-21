@@ -3,6 +3,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import { BookOpen, ChevronDown, ChevronUp, Star } from "lucide-react";
 import { islamBasics } from "@/data/islam-basics";
 import wuduStepsImg from "@/assets/wudu-steps.png";
+import fivePillarsImg from "@/assets/five-pillars.jpg";
+import sixArticlesImg from "@/assets/six-articles.jpg";
+import fivePrayersImg from "@/assets/five-prayers.jpg";
+
+const imageMap: Record<string, string> = {
+  "wudu-steps": wuduStepsImg,
+  "five-pillars": fivePillarsImg,
+  "six-articles": sixArticlesImg,
+  "five-prayers": fivePrayersImg,
+};
 
 const Learn = () => {
   const [expandedId, setExpandedId] = useState<string | null>("shahada");
@@ -76,10 +86,10 @@ const Learn = () => {
                           {topic.description}
                         </p>
 
-                        {topic.image === "wudu-steps" && (
+                        {topic.image && imageMap[topic.image] && (
                           <img
-                            src={wuduStepsImg}
-                            alt="Steps of Wudu - Ablution"
+                            src={imageMap[topic.image]}
+                            alt={topic.title}
                             className="w-full rounded-xl border border-border/50"
                             loading="lazy"
                           />
