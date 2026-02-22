@@ -80,7 +80,7 @@ const Names = () => {
 
       {/* Orbit View */}
       {viewMode === "orbit" && (
-        <div className="relative flex items-center justify-center" style={{ height: "65vh" }}>
+        <div className="relative flex items-center justify-center overflow-hidden" style={{ height: "70vh" }}>
           {/* Center "Allah" */}
           <motion.div
             className="absolute z-10 w-20 h-20 rounded-full flex items-center justify-center nur-gradient shadow-2xl"
@@ -98,56 +98,62 @@ const Names = () => {
           {[1, 2, 3].map((ring) => (
             <div
               key={ring}
-              className="absolute rounded-full border border-border/30"
+              className="absolute rounded-full border border-border/20"
               style={{
-                width: ring * 150 + 60,
-                height: ring * 150 + 60,
+                width: ring * 120 + 60,
+                height: ring * 120 + 60,
               }}
             />
           ))}
 
-          {/* Orbiting names */}
-          {filtered.slice(0, 99).map((name, i) => {
-            const ring = i < 12 ? 1 : i < 36 ? 2 : 3;
-            const ringCount = ring === 1 ? 12 : ring === 2 ? 24 : 63;
-            const ringStart = ring === 1 ? 0 : ring === 2 ? 12 : 36;
-            const indexInRing = i - ringStart;
-            const angle = (indexInRing / ringCount) * 360;
-            const radius = ring * 75 + 30;
-            const speed = 60 + ring * 30;
+          {/* Orbiting names - each ring is a rotating container */}
+          {[1, 2, 3].map((ring) => {
+            const ringRadius = ring * 60 + 30;
+            const ringSize = ringRadius * 2 + 50;
+            const speed = 50 + ring * 25;
+            const ringNames = filtered.slice(
+              ring === 1 ? 0 : ring === 2 ? 12 : 36,
+              ring === 1 ? 12 : ring === 2 ? 36 : 99
+            );
+            const dotSize = ring === 1 ? 36 : ring === 2 ? 28 : 22;
+            const fontSize = ring === 1 ? 10 : ring === 2 ? 8 : 6;
 
             return (
-              <motion.button
-                key={name.id}
+              <motion.div
+                key={ring}
                 className="absolute z-20"
-                style={{
-                  width: ring === 1 ? 40 : ring === 2 ? 32 : 26,
-                  height: ring === 1 ? 40 : ring === 2 ? 32 : 26,
-                }}
-                animate={{
-                  rotate: [angle, angle + 360],
-                }}
-                transition={{
-                  duration: speed,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-                onClick={() => setSelectedName(name)}
+                style={{ width: ringSize, height: ringSize }}
+                animate={{ rotate: [0, ring % 2 === 0 ? -360 : 360] }}
+                transition={{ duration: speed, repeat: Infinity, ease: "linear" }}
               >
-                <motion.div
-                  className="w-full h-full rounded-full bg-card border border-border/50 flex items-center justify-center shadow-md hover:nur-glow-effect cursor-pointer"
-                  style={{
-                    transform: `translateX(${radius}px)`,
-                  }}
-                  animate={{ rotate: [-(angle), -(angle + 360)] }}
-                  transition={{ duration: speed, repeat: Infinity, ease: "linear" }}
-                  whileHover={{ scale: 1.4 }}
-                >
-                  <span className="font-arabic text-foreground" style={{ fontSize: ring === 1 ? 11 : ring === 2 ? 9 : 7 }}>
-                    {name.arabic.split(" ")[0]}
-                  </span>
-                </motion.div>
-              </motion.button>
+                {ringNames.map((name, idx) => {
+                  const angle = (idx / ringNames.length) * 360;
+                  const rad = (angle * Math.PI) / 180;
+                  const x = Math.cos(rad) * ringRadius + ringSize / 2 - dotSize / 2;
+                  const y = Math.sin(rad) * ringRadius + ringSize / 2 - dotSize / 2;
+
+                  return (
+                    <motion.button
+                      key={name.id}
+                      className="absolute rounded-full bg-card border border-border/50 flex items-center justify-center shadow-sm cursor-pointer hover:shadow-md hover:border-primary/30 transition-shadow"
+                      style={{
+                        width: dotSize,
+                        height: dotSize,
+                        left: x,
+                        top: y,
+                      }}
+                      animate={{ rotate: ring % 2 === 0 ? [0, 360] : [0, -360] }}
+                      transition={{ duration: speed, repeat: Infinity, ease: "linear" }}
+                      onClick={() => setSelectedName(name)}
+                      whileTap={{ scale: 1.3 }}
+                    >
+                      <span className="font-arabic text-foreground" style={{ fontSize }}>
+                        {name.arabic.split(" ")[0]}
+                      </span>
+                    </motion.button>
+                  );
+                })}
+              </motion.div>
             );
           })}
         </div>
