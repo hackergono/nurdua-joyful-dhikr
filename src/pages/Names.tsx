@@ -111,8 +111,8 @@ const Names = () => {
             const cx = Math.cos(rad) * radius;
             const cy = Math.sin(rad) * radius;
 
-            const dotSize = idx < 12 ? 36 : idx < 33 ? 30 : 24;
-            const fontSize = idx < 12 ? 12 : idx < 33 ? 9 : 7;
+            const dotSize = idx < 12 ? 42 : idx < 33 ? 34 : 26;
+            const fontSize = idx < 12 ? 8 : idx < 33 ? 6.5 : 5.5;
 
             const floatDelay = (idx % 7) * 0.4;
 
@@ -130,8 +130,8 @@ const Names = () => {
                 }}
                 onClick={() => setSelectedName(name)}
               >
-                <span className="font-arabic text-foreground font-bold" style={{ fontSize }}>
-                  {name.arabic.split(" ")[0]}
+                <span className="text-foreground font-bold leading-none text-center" style={{ fontSize }}>
+                  {name.transliteration.replace(/^(Al-|Ar-|As-|Ash-|Adh-|Ad-|At-)/, "")}
                 </span>
               </button>
             );
