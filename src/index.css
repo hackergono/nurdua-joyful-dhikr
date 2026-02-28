@@ -191,6 +191,11 @@
 }
 
 @layer utilities {
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
   @keyframes particle {
     0% { transform: scale(1) translate(0, 0); opacity: 1; }
     100% { transform: scale(0) translate(var(--tx, 20px), var(--ty, -20px)); opacity: 0; }
