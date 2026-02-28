@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, X, Sparkles } from "lucide-react";
 import { allahNames } from "@/data/allah-names";
@@ -82,31 +82,11 @@ const Names = () => {
       {viewMode === "orbit" && (
         <div className="relative flex items-center justify-center" style={{ height: "75vh", width: "100%", overflow: "hidden" }}>
           {/* Center "Allah" */}
-          <motion.div
-            className="absolute z-10 w-24 h-24 rounded-full flex items-center justify-center nur-gradient shadow-2xl"
-            animate={{ boxShadow: [
-              "0 0 20px hsl(var(--nur-gold) / 0.3)",
-              "0 0 50px hsl(var(--nur-gold) / 0.6)",
-              "0 0 20px hsl(var(--nur-gold) / 0.3)",
-            ]}}
-            transition={{ duration: 3, repeat: Infinity }}
-          >
+          <div className="absolute z-10 w-24 h-24 rounded-full flex items-center justify-center nur-gradient shadow-2xl animate-pulse-glow">
             <span className="font-arabic text-3xl text-primary-foreground">ٱللَّٰهُ</span>
-          </motion.div>
+          </div>
 
-          {/* Orbital rings */}
-          {[1, 2, 3].map((ring) => {
-            const r = ring * 90 + 40;
-            return (
-              <div
-                key={ring}
-                className="absolute rounded-full border border-border/30"
-                style={{ width: r * 2, height: r * 2 }}
-              />
-            );
-          })}
-
-          {/* Orbiting names */}
+          {/* Orbital rings + names via pure CSS */}
           {[1, 2, 3].map((ring) => {
             const ringRadius = ring * 90 + 40;
             const ringSize = ringRadius * 2 + 60;
@@ -116,45 +96,48 @@ const Names = () => {
             const ringNames = filtered.slice(startIdx, startIdx + namesPerRing);
             const dotSize = ring === 1 ? 44 : ring === 2 ? 36 : 30;
             const fontSize = ring === 1 ? 14 : ring === 2 ? 11 : 9;
+            const direction = ring % 2 === 0 ? "reverse" : "normal";
 
             return (
-              <motion.div
-                key={ring}
-                className="absolute z-20"
-                style={{ width: ringSize, height: ringSize }}
-                animate={{ rotate: [0, ring % 2 === 0 ? -360 : 360] }}
-                transition={{ duration: speed, repeat: Infinity, ease: "linear" }}
-              >
-                {ringNames.map((name, idx) => {
-                  const angle = (idx / ringNames.length) * 360;
-                  const rad = (angle * Math.PI) / 180;
-                  const cx = ringSize / 2;
-                  const cy = ringSize / 2;
-                  const x = Math.cos(rad) * ringRadius + cx - dotSize / 2;
-                  const y = Math.sin(rad) * ringRadius + cy - dotSize / 2;
+              <div key={ring} className="absolute" style={{ width: ringSize, height: ringSize }}>
+                <div className="absolute inset-0 rounded-full border border-border/30" />
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    animation: `spin ${speed}s linear infinite ${direction}`,
+                    willChange: "transform",
+                  }}
+                >
+                  {ringNames.map((name, idx) => {
+                    const angle = (idx / ringNames.length) * 360;
+                    const rad = (angle * Math.PI) / 180;
+                    const cx = ringSize / 2;
+                    const cy = ringSize / 2;
+                    const x = Math.cos(rad) * ringRadius + cx - dotSize / 2;
+                    const y = Math.sin(rad) * ringRadius + cy - dotSize / 2;
 
-                  return (
-                    <motion.button
-                      key={name.id}
-                      className="absolute rounded-full bg-card border border-border/50 flex items-center justify-center shadow-md cursor-pointer hover:shadow-lg hover:border-primary/40 transition-shadow"
-                      style={{
-                        width: dotSize,
-                        height: dotSize,
-                        left: x,
-                        top: y,
-                      }}
-                      animate={{ rotate: ring % 2 === 0 ? [0, 360] : [0, -360] }}
-                      transition={{ duration: speed, repeat: Infinity, ease: "linear" }}
-                      onClick={() => setSelectedName(name)}
-                      whileTap={{ scale: 1.4 }}
-                    >
-                      <span className="font-arabic text-foreground font-bold" style={{ fontSize }}>
-                        {name.arabic.split(" ")[0]}
-                      </span>
-                    </motion.button>
-                  );
-                })}
-              </motion.div>
+                    return (
+                      <button
+                        key={name.id}
+                        className="absolute rounded-full bg-card border border-border/50 flex items-center justify-center shadow-md cursor-pointer z-20"
+                        style={{
+                          width: dotSize,
+                          height: dotSize,
+                          left: x,
+                          top: y,
+                          animation: `spin ${speed}s linear infinite ${direction === "normal" ? "reverse" : "normal"}`,
+                          willChange: "transform",
+                        }}
+                        onClick={() => setSelectedName(name)}
+                      >
+                        <span className="font-arabic text-foreground font-bold" style={{ fontSize }}>
+                          {name.arabic.split(" ")[0]}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
             );
           })}
         </div>
