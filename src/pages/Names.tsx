@@ -80,43 +80,42 @@ const Names = () => {
 
       {/* Orbit View */}
       {viewMode === "orbit" && (
-        <div className="relative flex items-center justify-center overflow-hidden" style={{ height: "70vh" }}>
+        <div className="relative flex items-center justify-center" style={{ height: "75vh", width: "100%", overflow: "hidden" }}>
           {/* Center "Allah" */}
           <motion.div
-            className="absolute z-10 w-20 h-20 rounded-full flex items-center justify-center nur-gradient shadow-2xl"
+            className="absolute z-10 w-24 h-24 rounded-full flex items-center justify-center nur-gradient shadow-2xl"
             animate={{ boxShadow: [
               "0 0 20px hsl(var(--nur-gold) / 0.3)",
-              "0 0 40px hsl(var(--nur-gold) / 0.6)",
+              "0 0 50px hsl(var(--nur-gold) / 0.6)",
               "0 0 20px hsl(var(--nur-gold) / 0.3)",
             ]}}
             transition={{ duration: 3, repeat: Infinity }}
           >
-            <span className="font-arabic text-2xl text-primary-foreground">ٱللَّٰهُ</span>
+            <span className="font-arabic text-3xl text-primary-foreground">ٱللَّٰهُ</span>
           </motion.div>
 
           {/* Orbital rings */}
-          {[1, 2, 3].map((ring) => (
-            <div
-              key={ring}
-              className="absolute rounded-full border border-border/20"
-              style={{
-                width: ring * 120 + 60,
-                height: ring * 120 + 60,
-              }}
-            />
-          ))}
-
-          {/* Orbiting names - each ring is a rotating container */}
           {[1, 2, 3].map((ring) => {
-            const ringRadius = ring * 60 + 30;
-            const ringSize = ringRadius * 2 + 50;
-            const speed = 50 + ring * 25;
-            const ringNames = filtered.slice(
-              ring === 1 ? 0 : ring === 2 ? 12 : 36,
-              ring === 1 ? 12 : ring === 2 ? 36 : 99
+            const r = ring * 90 + 40;
+            return (
+              <div
+                key={ring}
+                className="absolute rounded-full border border-border/30"
+                style={{ width: r * 2, height: r * 2 }}
+              />
             );
-            const dotSize = ring === 1 ? 36 : ring === 2 ? 28 : 22;
-            const fontSize = ring === 1 ? 10 : ring === 2 ? 8 : 6;
+          })}
+
+          {/* Orbiting names */}
+          {[1, 2, 3].map((ring) => {
+            const ringRadius = ring * 90 + 40;
+            const ringSize = ringRadius * 2 + 60;
+            const speed = 60 + ring * 30;
+            const namesPerRing = ring === 1 ? 10 : ring === 2 ? 20 : 33;
+            const startIdx = ring === 1 ? 0 : ring === 2 ? 10 : 30;
+            const ringNames = filtered.slice(startIdx, startIdx + namesPerRing);
+            const dotSize = ring === 1 ? 44 : ring === 2 ? 36 : 30;
+            const fontSize = ring === 1 ? 14 : ring === 2 ? 11 : 9;
 
             return (
               <motion.div
@@ -129,13 +128,15 @@ const Names = () => {
                 {ringNames.map((name, idx) => {
                   const angle = (idx / ringNames.length) * 360;
                   const rad = (angle * Math.PI) / 180;
-                  const x = Math.cos(rad) * ringRadius + ringSize / 2 - dotSize / 2;
-                  const y = Math.sin(rad) * ringRadius + ringSize / 2 - dotSize / 2;
+                  const cx = ringSize / 2;
+                  const cy = ringSize / 2;
+                  const x = Math.cos(rad) * ringRadius + cx - dotSize / 2;
+                  const y = Math.sin(rad) * ringRadius + cy - dotSize / 2;
 
                   return (
                     <motion.button
                       key={name.id}
-                      className="absolute rounded-full bg-card border border-border/50 flex items-center justify-center shadow-sm cursor-pointer hover:shadow-md hover:border-primary/30 transition-shadow"
+                      className="absolute rounded-full bg-card border border-border/50 flex items-center justify-center shadow-md cursor-pointer hover:shadow-lg hover:border-primary/40 transition-shadow"
                       style={{
                         width: dotSize,
                         height: dotSize,
@@ -145,9 +146,9 @@ const Names = () => {
                       animate={{ rotate: ring % 2 === 0 ? [0, 360] : [0, -360] }}
                       transition={{ duration: speed, repeat: Infinity, ease: "linear" }}
                       onClick={() => setSelectedName(name)}
-                      whileTap={{ scale: 1.3 }}
+                      whileTap={{ scale: 1.4 }}
                     >
-                      <span className="font-arabic text-foreground" style={{ fontSize }}>
+                      <span className="font-arabic text-foreground font-bold" style={{ fontSize }}>
                         {name.arabic.split(" ")[0]}
                       </span>
                     </motion.button>
