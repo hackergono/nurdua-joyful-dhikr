@@ -1,4 +1,4 @@
-import { useState, useMemo, memo } from "react";
+import { useState, useMemo, memo, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, X, Sparkles } from "lucide-react";
 import { allahNames } from "@/data/allah-names";
@@ -80,7 +80,22 @@ const Names = () => {
 
       {/* Galaxy View */}
       {viewMode === "orbit" && (
-        <div className="relative flex items-center justify-center" style={{ height: "75vh", width: "100%", overflow: "hidden" }}>
+        <div className="relative flex items-center justify-center rounded-2xl" style={{ height: "75vh", width: "100%", overflow: "hidden", background: "radial-gradient(ellipse at center, hsl(var(--nur-teal) / 0.08) 0%, transparent 70%)" }}>
+          {/* Stars background */}
+          {Array.from({ length: 60 }).map((_, i) => (
+            <div
+              key={`star-${i}`}
+              className="absolute rounded-full bg-accent/40"
+              style={{
+                width: Math.random() * 3 + 1,
+                height: Math.random() * 3 + 1,
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animation: `pulse-glow ${2 + Math.random() * 3}s ease-in-out ${Math.random() * 2}s infinite`,
+                opacity: 0.3 + Math.random() * 0.5,
+              }}
+            />
+          ))}
           {/* Center "Allah" */}
           <div className="absolute z-10 w-24 h-24 rounded-full flex items-center justify-center nur-gradient shadow-2xl animate-pulse-glow">
             <span className="font-arabic text-3xl text-primary-foreground">ٱللَّٰهُ</span>

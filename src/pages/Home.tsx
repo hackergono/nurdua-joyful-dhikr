@@ -20,8 +20,7 @@ const Home = () => {
 
   const hour = new Date().getHours();
   const isEvening = hour >= 17 || hour < 5;
-  const greeting = isEvening ? "مساء الخير" : "السلام عليكم ✨";
-  const greetingIcon = isEvening ? <Moon size={18} className="text-accent" /> : <Sun size={18} className="text-accent" />;
+  const greeting = "السلام عليكم ✨";
 
   const dayIndex = getDayOfYear();
 
@@ -63,7 +62,7 @@ const Home = () => {
             transition={{ duration: 0.5 }}
           >
             <div className="flex items-center gap-2 mb-1">
-              {greetingIcon}
+              <Sparkles size={18} className="text-accent" />
               <span className="text-sm text-muted-foreground font-medium">{greeting}</span>
             </div>
             <h1 className="text-3xl font-bold text-foreground tracking-tight">NurDua</h1>
