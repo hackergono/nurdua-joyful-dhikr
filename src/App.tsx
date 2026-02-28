@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -11,30 +12,36 @@ import Names from "./pages/Names";
 import Learn from "./pages/Learn";
 import NotFound from "./pages/NotFound";
 import BottomNav from "./components/BottomNav";
+import SideMenu from "./components/SideMenu";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner position="top-center" />
-      <BrowserRouter>
-        <div className="max-w-lg mx-auto relative">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/dhikr" element={<Dhikr />} />
-            <Route path="/names" element={<Names />} />
-            <Route path="/learn" element={<Learn />} />
-            <Route path="/library" element={<Library />} />
-            <Route path="/progress" element={<Progress />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <BottomNav />
-        </div>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner position="top-center" />
+        <BrowserRouter>
+          <div className="max-w-lg mx-auto relative">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/dhikr" element={<Dhikr />} />
+              <Route path="/names" element={<Names />} />
+              <Route path="/learn" element={<Learn />} />
+              <Route path="/library" element={<Library />} />
+              <Route path="/progress" element={<Progress />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            <SideMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
+            <BottomNav onMenuOpen={() => setMenuOpen(true)} />
+          </div>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
