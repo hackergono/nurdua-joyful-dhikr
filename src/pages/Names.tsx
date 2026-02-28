@@ -47,7 +47,7 @@ const Names = () => {
           onClick={() => setViewMode(viewMode === "grid" ? "orbit" : "grid")}
           className="px-3 py-2 rounded-xl bg-card border border-border/50 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
         >
-          {viewMode === "grid" ? "✦ Orbit" : "▦ Grid"}
+          {viewMode === "grid" ? "✦ Galaxy" : "▦ Grid"}
         </button>
       </div>
 
@@ -78,7 +78,7 @@ const Names = () => {
         </div>
       )}
 
-      {/* Orbit View */}
+      {/* Galaxy View */}
       {viewMode === "orbit" && (
         <div className="relative flex items-center justify-center" style={{ height: "75vh", width: "100%", overflow: "hidden" }}>
           {/* Center "Allah" */}
@@ -86,58 +86,42 @@ const Names = () => {
             <span className="font-arabic text-3xl text-primary-foreground">ٱللَّٰهُ</span>
           </div>
 
-          {/* Orbital rings + names via pure CSS */}
-          {[1, 2, 3].map((ring) => {
-            const ringRadius = ring * 90 + 40;
-            const ringSize = ringRadius * 2 + 60;
-            const speed = 60 + ring * 30;
-            const namesPerRing = ring === 1 ? 15 : ring === 2 ? 30 : 54;
-            const startIdx = ring === 1 ? 0 : ring === 2 ? 15 : 45;
-            const ringNames = filtered.slice(startIdx, startIdx + namesPerRing);
-            const dotSize = ring === 1 ? 44 : ring === 2 ? 36 : 30;
-            const fontSize = ring === 1 ? 14 : ring === 2 ? 11 : 9;
-            const direction = ring % 2 === 0 ? "reverse" : "normal";
+          {/* Honeycomb / hexagonal spiral layout */}
+          {filtered.slice(0, 99).map((name, idx) => {
+            // Golden angle spiral for natural distribution
+            const goldenAngle = 137.508;
+            const angle = idx * goldenAngle;
+            const rad = (angle * Math.PI) / 180;
+            // Increase radius gradually with sqrt for even spacing
+            const maxRadius = Math.min(window.innerWidth * 0.44, 170);
+            const radius = 35 + Math.sqrt(idx / 99) * maxRadius;
+            const cx = Math.cos(rad) * radius;
+            const cy = Math.sin(rad) * radius;
+
+            const dotSize = idx < 12 ? 40 : idx < 33 ? 34 : 28;
+            const fontSize = idx < 12 ? 13 : idx < 33 ? 10 : 8;
+
+            // Gentle floating animation with staggered delays
+            const floatDelay = (idx % 7) * 0.4;
 
             return (
-              <div key={ring} className="absolute" style={{ width: ringSize, height: ringSize }}>
-                <div className="absolute inset-0 rounded-full border border-border/30" />
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    animation: `spin ${speed}s linear infinite ${direction}`,
-                    willChange: "transform",
-                  }}
-                >
-                  {ringNames.map((name, idx) => {
-                    const angle = (idx / ringNames.length) * 360;
-                    const rad = (angle * Math.PI) / 180;
-                    const cx = ringSize / 2;
-                    const cy = ringSize / 2;
-                    const x = Math.cos(rad) * ringRadius + cx - dotSize / 2;
-                    const y = Math.sin(rad) * ringRadius + cy - dotSize / 2;
-
-                    return (
-                      <button
-                        key={name.id}
-                        className="absolute rounded-full bg-card border border-border/50 flex items-center justify-center shadow-md cursor-pointer z-20"
-                        style={{
-                          width: dotSize,
-                          height: dotSize,
-                          left: x,
-                          top: y,
-                          animation: `spin ${speed}s linear infinite ${direction === "normal" ? "reverse" : "normal"}`,
-                          willChange: "transform",
-                        }}
-                        onClick={() => setSelectedName(name)}
-                      >
-                        <span className="font-arabic text-foreground font-bold" style={{ fontSize }}>
-                          {name.arabic.split(" ")[0]}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
+              <button
+                key={name.id}
+                className="absolute rounded-full bg-card border border-border/50 flex items-center justify-center shadow-md cursor-pointer z-20 transition-transform active:scale-125"
+                style={{
+                  width: dotSize,
+                  height: dotSize,
+                  left: `calc(50% + ${cx}px - ${dotSize / 2}px)`,
+                  top: `calc(50% + ${cy}px - ${dotSize / 2}px)`,
+                  animation: `float 3s ease-in-out ${floatDelay}s infinite`,
+                  willChange: "transform",
+                }}
+                onClick={() => setSelectedName(name)}
+              >
+                <span className="font-arabic text-foreground font-bold" style={{ fontSize }}>
+                  {name.arabic.split(" ")[0]}
+                </span>
+              </button>
             );
           })}
         </div>

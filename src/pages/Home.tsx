@@ -20,7 +20,7 @@ const Home = () => {
 
   const hour = new Date().getHours();
   const isEvening = hour >= 17 || hour < 5;
-  const greeting = isEvening ? "Good Evening" : hour < 12 ? "Good Morning" : "Good Afternoon";
+  const greeting = isEvening ? "مساء الخير" : "السلام عليكم ✨";
   const greetingIcon = isEvening ? <Moon size={18} className="text-accent" /> : <Sun size={18} className="text-accent" />;
 
   const dayIndex = getDayOfYear();
