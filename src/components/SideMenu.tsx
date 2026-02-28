@@ -1,6 +1,7 @@
-import { Sparkles, BookOpen, BarChart3, X } from "lucide-react";
+import { Sparkles, BookOpen, BarChart3, X, Moon, Sun } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
 
 const menuItems = [
   { path: "/names", icon: Sparkles, label: "99 Names of Allah" },
@@ -16,6 +17,30 @@ interface SideMenuProps {
 const SideMenu = ({ isOpen, onClose }: SideMenuProps) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [isDark, setIsDark] = useState(() =>
+    document.documentElement.classList.contains("dark")
+  );
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    localStorage.setItem("nur-theme", isDark ? "dark" : "light");
+  }, [isDark]);
+
+  // Load saved preference on mount
+  useEffect(() => {
+    const saved = localStorage.getItem("nur-theme");
+    if (saved === "dark") {
+      setIsDark(true);
+    } else if (saved === "light") {
+      setIsDark(false);
+    } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      setIsDark(true);
+    }
+  }, []);
 
   const handleNav = (path: string) => {
     navigate(path);
@@ -69,16 +94,26 @@ const SideMenu = ({ isOpen, onClose }: SideMenuProps) => {
                         : "text-foreground hover:bg-muted/50"
                     }`}
                   >
-                    <Icon
-                      size={22}
-                      strokeWidth={isActive ? 2.5 : 1.5}
-                    />
+                    <Icon size={22} strokeWidth={isActive ? 2.5 : 1.5} />
                     <span className={`text-sm ${isActive ? "font-semibold" : "font-medium"}`}>
                       {item.label}
                     </span>
                   </button>
                 );
               })}
+            </div>
+
+            {/* Dark mode toggle */}
+            <div className="px-4 pb-3">
+              <button
+                onClick={() => setIsDark(!isDark)}
+                className="w-full flex items-center gap-4 px-4 py-3.5 rounded-xl text-foreground hover:bg-muted/50 transition-all active:scale-[0.98]"
+              >
+                {isDark ? <Sun size={22} strokeWidth={1.5} /> : <Moon size={22} strokeWidth={1.5} />}
+                <span className="text-sm font-medium">
+                  {isDark ? "Light Mode" : "Dark Mode"}
+                </span>
+              </button>
             </div>
 
             {/* Footer */}

@@ -101,22 +101,19 @@ const Names = () => {
             <span className="font-arabic text-3xl text-primary-foreground">ٱللَّٰهُ</span>
           </div>
 
-          {/* Honeycomb / hexagonal spiral layout */}
+          {/* Golden angle spiral layout */}
           {filtered.slice(0, 99).map((name, idx) => {
-            // Golden angle spiral for natural distribution
             const goldenAngle = 137.508;
             const angle = idx * goldenAngle;
             const rad = (angle * Math.PI) / 180;
-            // Increase radius gradually with sqrt for even spacing
-            const maxRadius = Math.min(window.innerWidth * 0.44, 170);
-            const radius = 35 + Math.sqrt(idx / 99) * maxRadius;
+            const maxRadius = Math.min(window.innerWidth * 0.33, 135);
+            const radius = 28 + Math.sqrt(idx / 99) * maxRadius;
             const cx = Math.cos(rad) * radius;
             const cy = Math.sin(rad) * radius;
 
-            const dotSize = idx < 12 ? 40 : idx < 33 ? 34 : 28;
-            const fontSize = idx < 12 ? 13 : idx < 33 ? 10 : 8;
+            const dotSize = idx < 12 ? 36 : idx < 33 ? 30 : 24;
+            const fontSize = idx < 12 ? 12 : idx < 33 ? 9 : 7;
 
-            // Gentle floating animation with staggered delays
             const floatDelay = (idx % 7) * 0.4;
 
             return (
