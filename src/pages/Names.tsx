@@ -91,8 +91,8 @@ const Names = () => {
             const ringRadius = ring * 90 + 40;
             const ringSize = ringRadius * 2 + 60;
             const speed = 60 + ring * 30;
-            const namesPerRing = ring === 1 ? 10 : ring === 2 ? 20 : 33;
-            const startIdx = ring === 1 ? 0 : ring === 2 ? 10 : 30;
+            const namesPerRing = ring === 1 ? 15 : ring === 2 ? 30 : 54;
+            const startIdx = ring === 1 ? 0 : ring === 2 ? 15 : 45;
             const ringNames = filtered.slice(startIdx, startIdx + namesPerRing);
             const dotSize = ring === 1 ? 44 : ring === 2 ? 36 : 30;
             const fontSize = ring === 1 ? 14 : ring === 2 ? 11 : 9;
