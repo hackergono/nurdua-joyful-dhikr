@@ -61,31 +61,30 @@ const Dhikr = () => {
   };
 
   const downloadAzkar = () => {
-    const formatSection = (title: string, subtitle: string, list: Azkar[]) => {
-      let text = `${"=".repeat(60)}\n${title} — ${subtitle}\n${"=".repeat(60)}\n\n`;
-      list.forEach((item, i) => {
-        text += `${i + 1}. ${item.arabic}\n`;
-        text += `   Transliteration: ${item.transliteration}\n`;
-        text += `   English: ${item.english}\n`;
-        text += `   Repeat: ${item.repeat}\n\n`;
-      });
-      return text;
+    const formatList = (list: Azkar[]) =>
+      list.map((item) => ({
+        arabic: item.arabic,
+        transliteration: item.transliteration,
+        english: item.english,
+        repeat: item.repeat,
+      }));
+
+    const data = {
+      title: "Azkar Collection",
+      source: "NurDua App",
+      morningAzkar: formatList(morningAzkar),
+      eveningAzkar: formatList(eveningAzkar),
+      nightAzkar: formatList(nightAzkar),
     };
 
-    const content =
-      "AZKAR COLLECTION\nGenerated from NurDua App\n\n" +
-      formatSection("Morning Azkar", "أذكار الصباح", morningAzkar) +
-      formatSection("Evening Azkar", "أذكار المساء", eveningAzkar) +
-      formatSection("Night Azkar", "أذكار النوم", nightAzkar);
-
-    const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "azkar-collection.txt";
+    a.download = "azkar-collection.json";
     a.click();
     URL.revokeObjectURL(url);
-    toast.success("Azkar file downloaded! 📄");
+    toast.success("Azkar JSON file downloaded! 📄");
   };
 
   return (
