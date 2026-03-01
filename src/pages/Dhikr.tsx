@@ -1,8 +1,8 @@
 import { useState, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { RotateCcw, ChevronLeft, ChevronRight, Check, Sun, Moon, Star } from "lucide-react";
+import { RotateCcw, ChevronLeft, ChevronRight, Check, Sun, Moon, Star, Download } from "lucide-react";
 import { dhikrList } from "@/data/duas";
-import { morningAzkar, eveningAzkar, nightAzkar } from "@/data/azkar";
+import { morningAzkar, eveningAzkar, nightAzkar, Azkar } from "@/data/azkar";
 import { useLocalStorage } from "@/hooks/use-local-storage";
 import ParticleBurst from "@/components/ParticleBurst";
 import { toast } from "sonner";
@@ -58,6 +58,34 @@ const Dhikr = () => {
     if (activeTab === "morning") return "أذكار الصباح";
     if (activeTab === "evening") return "أذكار المساء";
     return "أذكار النوم";
+  };
+
+  const downloadAzkar = () => {
+    const formatSection = (title: string, subtitle: string, list: Azkar[]) => {
+      let text = `${"=".repeat(60)}\n${title} — ${subtitle}\n${"=".repeat(60)}\n\n`;
+      list.forEach((item, i) => {
+        text += `${i + 1}. ${item.arabic}\n`;
+        text += `   Transliteration: ${item.transliteration}\n`;
+        text += `   English: ${item.english}\n`;
+        text += `   Repeat: ${item.repeat}\n\n`;
+      });
+      return text;
+    };
+
+    const content =
+      "AZKAR COLLECTION\nGenerated from NurDua App\n\n" +
+      formatSection("Morning Azkar", "أذكار الصباح", morningAzkar) +
+      formatSection("Evening Azkar", "أذكار المساء", eveningAzkar) +
+      formatSection("Night Azkar", "أذكار النوم", nightAzkar);
+
+    const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "azkar-collection.txt";
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success("Azkar file downloaded! 📄");
   };
 
   return (
@@ -205,10 +233,19 @@ const Dhikr = () => {
       {(activeTab === "morning" || activeTab === "evening" || activeTab === "night") && (
         <div className="flex-1">
           <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-4">
-            <h1 className="text-xl font-bold text-foreground flex items-center gap-2">
-              {activeTab === "morning" ? <Sun size={18} className="text-accent" /> : activeTab === "evening" ? <Moon size={18} className="text-accent" /> : <Star size={18} className="text-accent" />}
-              {getTitle()}
-            </h1>
+            <div className="flex items-center justify-between">
+              <h1 className="text-xl font-bold text-foreground flex items-center gap-2">
+                {activeTab === "morning" ? <Sun size={18} className="text-accent" /> : activeTab === "evening" ? <Moon size={18} className="text-accent" /> : <Star size={18} className="text-accent" />}
+                {getTitle()}
+              </h1>
+              <button
+                onClick={downloadAzkar}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-muted text-muted-foreground hover:bg-muted/80 transition-colors text-xs font-medium active:scale-95"
+              >
+                <Download size={14} />
+                Download All
+              </button>
+            </div>
             <p className="text-xs text-muted-foreground mt-0.5">
               {azkarList.length} duas · {getSubtitle()}
             </p>
